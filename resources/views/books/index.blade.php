@@ -44,6 +44,7 @@
                             </div>
                             <div class="book-review-count">
                                 out of {{ $book->reviews_count }} {{ Str::plural('review', $book->reviews_count) }}
+                                <x-starRating :rating="$book->reviews_avg_rating"></x-starRating>
                             </div>
                         </div>
                     </div>
