@@ -4,8 +4,8 @@ namespace App\Models;
 
 use App\Models\Review;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 
 class Book extends Model
@@ -34,12 +34,13 @@ class Book extends Model
 
     public function scopePopular(Builder $query, $from = null, $to = null): Builder|QueryBuilder
     {
-        return $query->withReviewsCount->orderBy('reviews_count', 'desc');
+        return $query->withReviewsCount()->orderBy('reviews_count', 'desc');
     }
 
     public function scopeHighestRated(Builder $query, $from = null, $to = null): Builder|QueryBuilder
     {
-        return $query->withAvgRating->orderBy('reviews_avg_rating', 'desc');
+        return $query->withAvgRating()
+            ->orderBy('reviews_avg_rating', 'desc');
     }
 
     public function scopeMinReviews(Builder $query, int $minReviews): Builder|QueryBuilder
